@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/levigross/grequests v0.0.0-20190908174114-253788527a1a
-	github.com/maczh/mgin v1.19.1
+	github.com/maczh/mgin v1.19.12
 )
 
 require (

@@ -12,6 +12,11 @@ import (
 	"time"
 )
 
+type JobRes struct {
+	ApiTimeout int    `json:"apiTimeout"`
+	Location   string `json:"location"`
+}
+
 func Get(url string, data interface{}) (string, error) {
 	logs.Debug("请求参数：{}", data)
 	dataStr := utils.ToJSON(data)
@@ -115,12 +120,12 @@ func Post(url string, params interface{}) (string, error) {
 	//用户需要周期性的GET该轮询地址以获得API的执行结果
 
 	if resp.StatusCode == 202 {
-		var res map[string]string
+		res := JobRes{}
 		utils.FromJSON(resp.String(), &res)
 		for {
 			time.Sleep(1 * time.Second)
 
-			arr := strings.Split(res["location"], "/zstack")
+			arr := strings.Split(res.Location, "/zstack")
 			location := fmt.Sprint(obj["host"]) + "zstack" + arr[1]
 			resp, err = grequests.Get(location, &grequests.RequestOptions{
 				Headers: header,
@@ -169,11 +174,11 @@ func Put(url string, params interface{}) (string, error) {
 	//用户调用一个异步API成功后会收到202返回码以及 Body中包含的一个轮询地址（location字段），
 	//用户需要周期性的GET该轮询地址以获得API的执行结果
 	if resp.StatusCode == 202 {
-		var res map[string]string
+		res := JobRes{}
 		utils.FromJSON(resp.String(), &res)
 		for {
 			time.Sleep(1 * time.Second)
-			arr := strings.Split(res["location"], "/zstack")
+			arr := strings.Split(res.Location, "/zstack")
 			location := fmt.Sprint(obj["host"]) + "zstack" + arr[1]
 			resp, err = grequests.Get(location, &grequests.RequestOptions{
 				Headers: header,
@@ -225,11 +230,11 @@ func Delete(url string, params interface{}) (string, error) {
 	//用户调用一个异步API成功后会收到202返回码以及 Body中包含的一个轮询地址（location字段），
 	//用户需要周期性的GET该轮询地址以获得API的执行结果
 	if resp.StatusCode == 202 {
-		var res map[string]string
+		res := JobRes{}
 		utils.FromJSON(resp.String(), &res)
 		for {
 			time.Sleep(1 * time.Second)
-			arr := strings.Split(res["location"], "/zstack")
+			arr := strings.Split(res.Location, "/zstack")
 			location := fmt.Sprint(obj["host"]) + "zstack" + arr[1]
 			resp, err = grequests.Get(location, &grequests.RequestOptions{
 				Headers: header,
@@ -307,11 +312,11 @@ func DeleteUrlWithParams(url string, params interface{}) (string, error) {
 	//用户调用一个异步API成功后会收到202返回码以及 Body中包含的一个轮询地址（location字段），
 	//用户需要周期性的GET该轮询地址以获得API的执行结果
 	if resp.StatusCode == 202 {
-		var res map[string]string
+		res := JobRes{}
 		utils.FromJSON(resp.String(), &res)
 		for {
 			time.Sleep(1 * time.Second)
-			arr := strings.Split(res["location"], "/zstack")
+			arr := strings.Split(res.Location, "/zstack")
 			location := fmt.Sprint(obj["host"]) + "zstack" + arr[1]
 			resp, err = grequests.Get(location, &grequests.RequestOptions{
 				Headers: header,

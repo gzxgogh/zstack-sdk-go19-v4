@@ -155,7 +155,7 @@ type VipInventory struct {
 	State              string         `json:"state" bson:"state"`
 	Gateway            string         `json:"gateway" bson:"gateway"`                       //网关
 	Netmask            string         `json:"netmask" bson:"netmask"`                       //子网掩码
-	PrefixLen          string         `json:"prefixLen" bson:"prefixLen"`                   //掩码长度
+	PrefixLen          int            `json:"prefixLen" bson:"prefixLen"`                   //掩码长度
 	ServiceProvider    string         `json:"serviceProvider" bson:"serviceProvider"`       //提供VIP服务的服务提供者
 	PeerL3NetworkUuids string         `json:"peerL3NetworkUuids" bson:"peerL3NetworkUuids"` //提供VIP服务的L3网络UUID
 	UseFor             string         `json:"useFor" bson:"useFor"`                         //用途，例如：端口转发
