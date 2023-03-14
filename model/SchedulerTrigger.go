@@ -113,12 +113,12 @@ type CreateSchedulerJobRequest struct {
 }
 
 type CreateSchedulerJobParams struct {
-	Name               string                 `json:"name,omitempty" bson:"name,omitempty"`                 //资源名称
-	Description        string                 `json:"description,omitempty" bson:"description,omitempty"`   //详细描述
-	TargetResourceUuid string                 `json:"targetResourceUuid" bson:"targetResourceUuid"`         //目标资源UUID
-	Type               string                 `json:"type" bson:"type"`                                     //startVm,stopVm,rebootVm,volumeSnapshot
-	Parameters         map[string]interface{} `json:"parameters,omitempty" bson:"parameters,omitempty"`     //参数列表，json字符串
-	ResourceUuid       string                 `json:"resourceUuid,omitempty" bson:"resourceUuid,omitempty"` //资源UUID。若指定，镜像会使用该字段值作为UUID。
+	Name               string            `json:"name,omitempty" bson:"name,omitempty"`                 //资源名称
+	Description        string            `json:"description,omitempty" bson:"description,omitempty"`   //详细描述
+	TargetResourceUuid string            `json:"targetResourceUuid" bson:"targetResourceUuid"`         //目标资源UUID
+	Type               string            `json:"type" bson:"type"`                                     //startVm,stopVm,rebootVm,volumeSnapshot,volumeBackup,vmBackup,databaseBackup
+	Parameters         map[string]string `json:"parameters,omitempty" bson:"parameters,omitempty"`     //当type为startVm,stopVm,rebootVm时parameters为空，当type为volumeSnapshot时parameters(key:snapshotMaxNumber)
+	ResourceUuid       string            `json:"resourceUuid,omitempty" bson:"resourceUuid,omitempty"` //资源UUID。若指定，镜像会使用该字段值作为UUID。
 }
 
 type CreateSchedulerJobResponse struct {
@@ -193,7 +193,7 @@ type ChangeSchedulerStateRequest struct {
 }
 
 type ChangeSchedulerStateParams struct {
-	StateEvent string `json:"stateEvent" bson:"stateEvent"`
+	StateEvent string `json:"stateEvent" bson:"stateEvent"` //enable,disable
 }
 
 type ChangeSchedulerStateResponse struct {
@@ -208,8 +208,8 @@ type SchedulerTriggerInventory struct {
 	SchedulerType     string   `json:"schedulerType" bson:"schedulerType"`         //simple,cron
 	SchedulerInterval int      `json:"schedulerInterval" bson:"schedulerInterval"` //间隔时间:当简单定时任务执行超过一次时，必须设置间隔时间,简单定时任务永远重复时，必须设置间隔时间
 	RepeatCount       int      `json:"repeatCount" bson:"repeatCount"`
-	StartTime         int64    `json:"startTime" bson:"startTime"` //开始时间
-	StopTime          int64    `json:"stopTime" bson:"stopTime"`
+	StartTime         string   `json:"startTime" bson:"startTime"` //开始时间
+	StopTime          string   `json:"stopTime" bson:"stopTime"`
 	CreateDate        string   `json:"createDate" bson:"createDate"` //创建时间
 	LastOpDate        string   `json:"lastOpDate" bson:"lastOpDate"` //最后一次修改时间
 	JobsUuid          []string `json:"jobsUuid" bson:"jobsUuid"`

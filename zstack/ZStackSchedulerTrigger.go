@@ -27,7 +27,7 @@ func CreateSchedulerTrigger(params model.CreateSchedulerTriggerRequest) models.R
 }
 
 // 删除定时器
-func DeleteSchedulerTrigger(params model.DeleteResourcePriceRequest) models.Result[any] {
+func DeleteSchedulerTrigger(params model.DeleteSchedulerTriggerRequest) models.Result[any] {
 	//DELETE zstack/v1/scheduler/triggers/{uuid}?deleteMode={deleteMode}
 	url := fmt.Sprintf("zstack/v1/scheduler/triggers/%s", params.UUID)
 
@@ -121,7 +121,7 @@ func CreateSchedulerJob(params model.CreateSchedulerJobRequest) models.Result[an
 	if err != nil {
 		return models.Error(errcode.CreateSchedulerJobFailed, err.Error())
 	}
-	var respResult model.CreateSchedulerTriggerResponse
+	var respResult model.CreateSchedulerJobResponse
 	utils.FromJSON(dataStr, &respResult)
 	logs.Debug("最终结果:{}", respResult)
 
