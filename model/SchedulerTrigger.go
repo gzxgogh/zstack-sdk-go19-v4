@@ -76,11 +76,10 @@ type UpdateSchedulerTriggerResponse struct {
 // 添加定时任务到定时器
 type AddSchedulerJobToSchedulerTriggerRequest struct {
 	ReqConfig
-	SchedulerJobUuid     string                       `json:"schedulerJobUuid" bson:"schedulerJobUuid"`         //定时任务UUID
-	SchedulerTriggerUuid string                       `json:"schedulerTriggerUuid" bson:"schedulerTriggerUuid"` //定时器UUID
-	Params               UpdateSchedulerTriggerParams `json:"params" bson:"params"`
-	SystemTags           []string                     `json:"systemTags,omitempty" bson:"systemTags,omitempty"` //云主机系统标签
-	UserTags             []string                     `json:"userTags,omitempty" bson:"userTags,omitempty"`
+	SchedulerJobUuid     string   `json:"schedulerJobUuid" bson:"schedulerJobUuid"`         //定时任务UUID
+	SchedulerTriggerUuid string   `json:"schedulerTriggerUuid" bson:"schedulerTriggerUuid"` //定时器UUID
+	SystemTags           []string `json:"systemTags,omitempty" bson:"systemTags,omitempty"` //云主机系统标签
+	UserTags             []string `json:"userTags,omitempty" bson:"userTags,omitempty"`
 }
 
 type AddSchedulerJobToSchedulerTriggerParams struct {
