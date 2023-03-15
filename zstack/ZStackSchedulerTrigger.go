@@ -159,7 +159,7 @@ func QuerySchedulerJob(params model.QuerySchedulerJobRequest) models.Result[any]
 	if err != nil {
 		return models.Error(errcode.QuerySchedulerJobFailed, err.Error())
 	}
-	var respResult model.QuerySchedulerTriggerResponse
+	var respResult model.QuerySchedulerJobResponse
 	utils.FromJSON(dataStr, &respResult)
 	logs.Debug("最终结果:{}", respResult)
 

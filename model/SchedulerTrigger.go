@@ -148,8 +148,8 @@ type QuerySchedulerJobRequest struct {
 }
 
 type QuerySchedulerJobResponse struct {
-	Inventories []SchedulerTriggerInventory `json:"inventories" bson:"inventories"`
-	Error       ErrorCode                   `json:"error,omitempty" bson:"error,omitempty"` //错误信息
+	Inventories []SchedulerInventory `json:"inventories" bson:"inventories"`
+	Error       ErrorCode            `json:"error,omitempty" bson:"error,omitempty"` //错误信息
 }
 
 // 更新定时任务
