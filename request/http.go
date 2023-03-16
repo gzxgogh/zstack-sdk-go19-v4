@@ -136,16 +136,16 @@ func Post(url string, params interface{}) (string, error) {
 			}
 			logs.Debug("异步请求后的状态码:{}", resp.StatusCode)
 			logs.Debug("异步请求后的结果:{}", resp.String())
-			if resp.StatusCode == 200 {
+			if resp.StatusCode == 200 || resp.StatusCode == 503 {
 				return resp.String(), nil
-			} else if resp.StatusCode == 503 {
-				return "请求错误", errors.New("请求错误" + resp.String())
 			} else if resp.StatusCode != 202 {
 				return "请求错误", errors.New("请求错误" + resp.String())
 			}
 		}
+	} else if resp.StatusCode == 200 {
+		return resp.String(), nil
 	}
-	return "请求错误", errors.New(resp.String())
+	return "请求错误", errors.New("请求错误" + resp.String())
 }
 
 func Put(url string, params interface{}) (string, error) {
@@ -191,20 +191,16 @@ func Put(url string, params interface{}) (string, error) {
 			}
 			logs.Debug("异步请求后的状态码:{}", resp.StatusCode)
 			logs.Debug("异步请求后的结果:{}", resp.String())
-			if resp.StatusCode == 200 {
+			if resp.StatusCode == 200 || resp.StatusCode == 503 {
 				return resp.String(), nil
-			} else if resp.StatusCode == 503 {
-				return "请求错误", errors.New("请求错误" + resp.String())
 			} else if resp.StatusCode != 202 {
 				return "请求错误", errors.New("请求错误" + resp.String())
 			}
 		}
 	} else if resp.StatusCode == 200 {
 		return resp.String(), nil
-	} else if resp.StatusCode == 503 {
-		return "请求错误", errors.New("请求错误" + resp.String())
 	}
-	return "请求错误", errors.New(resp.String())
+	return "请求错误", errors.New("请求错误" + resp.String())
 }
 
 func Delete(url string, params interface{}) (string, error) {
@@ -251,21 +247,17 @@ func Delete(url string, params interface{}) (string, error) {
 			}
 			logs.Debug("异步请求后的状态码:{}", resp.StatusCode)
 			logs.Debug("异步请求后的结果:{}", resp.String())
-			if resp.StatusCode == 200 {
+			if resp.StatusCode == 200 || resp.StatusCode == 503 {
 				return resp.String(), nil
-			} else if resp.StatusCode == 503 {
-				return "请求错误", errors.New("请求错误" + resp.String())
 			} else if resp.StatusCode != 202 {
 				return "请求错误", errors.New("请求错误" + resp.String())
 			}
 		}
 	} else if resp.StatusCode == 200 {
 		return resp.String(), nil
-	} else if resp.StatusCode == 503 {
-		return "请求错误", errors.New("请求错误" + resp.String())
 	}
 
-	return "请求错误", errors.New(resp.String())
+	return "请求错误", errors.New("请求错误" + resp.String())
 }
 
 func DeleteUrlWithParams(url string, params interface{}) (string, error) {
@@ -337,18 +329,14 @@ func DeleteUrlWithParams(url string, params interface{}) (string, error) {
 			}
 			logs.Debug("异步请求后的状态码:{}", resp.StatusCode)
 			logs.Debug("异步请求后的结果:{}", resp.String())
-			if resp.StatusCode == 200 {
+			if resp.StatusCode == 200 || resp.StatusCode == 503 {
 				return resp.String(), nil
-			} else if resp.StatusCode == 503 {
-				return "请求错误", errors.New("请求错误" + resp.String())
 			} else if resp.StatusCode != 202 {
 				return "请求错误", errors.New("请求错误" + resp.String())
 			}
 		}
 	} else if resp.StatusCode == 200 {
 		return resp.String(), nil
-	} else if resp.StatusCode == 503 {
-		return "请求错误", errors.New("请求错误" + resp.String())
 	}
 
 	return "请求错误", errors.New(resp.String())
