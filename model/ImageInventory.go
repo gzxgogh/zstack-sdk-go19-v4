@@ -15,7 +15,7 @@ type ImageInventory struct {
 	Type              string                   `json:"type" bson:"type"`
 	Platform          string                   `json:"platform,omitempty" bson:"platform,omitempty"` //镜像的系统平台,Linux,Windows,WindowsVirtio,Other,Paravirtualization
 	Format            string                   `json:"format" bson:"format"`
-	System            string                   `json:"system,omitempty" bson:"system,omitempty"` //是否系统镜像（如，云路由镜像）
+	System            bool                     `json:"system,omitempty" bson:"system,omitempty"` //是否系统镜像（如，云路由镜像）
 	CreateDate        string                   `json:"createDate" bson:"createDate"`             //创建时间
 	LastOpDate        string                   `json:"lastOpDate" bson:"lastOpDate"`             //最后一次修改时间
 	BackupStorageRefs []ImageBackupStorageRefs `json:"backupStorageRefs" bson:"backupStorageRefs"`

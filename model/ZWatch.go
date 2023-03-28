@@ -66,7 +66,7 @@ type GetMetricDataResponse struct {
 }
 
 type MetricData struct {
-	Value  string                   `json:"value" bson:"value"`
+	Value  float64                  `json:"value" bson:"value"`
 	Time   int64                    `json:"time" bson:"time"`
 	Labels []MetricLabelValueLabels `json:"labels" bson:"labels"`
 }
