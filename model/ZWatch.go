@@ -66,9 +66,9 @@ type GetMetricDataResponse struct {
 }
 
 type MetricData struct {
-	Value  float64                  `json:"value" bson:"value"`
-	Time   int64                    `json:"time" bson:"time"`
-	Labels []MetricLabelValueLabels `json:"labels" bson:"labels"`
+	Value  float64                `json:"value" bson:"value"`
+	Time   int64                  `json:"time" bson:"time"`
+	Labels map[string]interface{} `json:"labels" bson:"labels"`
 }
 
 // 存入自定义metric数据
