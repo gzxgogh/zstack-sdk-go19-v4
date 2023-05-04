@@ -46,8 +46,8 @@ type GetAttachableVpcL3NetworkParams struct {
 }
 
 type GetAttachableVpcL3NetworkResponse struct {
-	Inventories []VpcRouterVmInventory `json:"inventories" bson:"inventories"`
-	Error       ErrorCode              `json:"error,omitempty" bson:"error,omitempty"` //错误信息
+	Inventories []L3NetworkInventory `json:"inventories" bson:"inventories"`
+	Error       ErrorCode            `json:"error,omitempty" bson:"error,omitempty"` //错误信息
 }
 
 // 获取实时流量状态
@@ -181,16 +181,16 @@ type ChangeVpcHaGroupMonitorIpsResponse struct {
 // 创建高可用组
 type CreateVpcHaGroupRequest struct {
 	ReqConfig
-	UUID       string                           `json:"uuid" bson:"uuid"` //资源的UUID
-	Params     ChangeVpcHaGroupMonitorIpsParams `json:"params" bson:"params"`
-	SystemTags []string                         `json:"systemTags,omitempty" bson:"systemTags,omitempty"` //云主机系统标签
-	UserTags   []string                         `json:"userTags,omitempty" bson:"userTags,omitempty"`
+	UUID       string                 `json:"uuid" bson:"uuid"` //资源的UUID
+	Params     CreateVpcHaGroupParams `json:"params" bson:"params"`
+	SystemTags []string               `json:"systemTags,omitempty" bson:"systemTags,omitempty"` //云主机系统标签
+	UserTags   []string               `json:"userTags,omitempty" bson:"userTags,omitempty"`
 }
 
 type CreateVpcHaGroupParams struct {
 	Name         string   `json:"name" bson:"name"`                                   //资源名称
 	Description  string   `json:"description,omitempty" bson:"description,omitempty"` //资源的详细描述
-	MonitorIp    string   `json:"monitorIp,omitempty" bson:"monitorIp,omitempty"`
+	MonitorIps   []string `json:"monitorIps,omitempty" bson:"monitorIps,omitempty"`
 	ResourceUuid string   `json:"resourceUuid,omitempty" bson:"resourceUuid,omitempty"` //资源UUID。若指定，镜像会使用该字段值作为UUID。
 	TagUuids     []string `json:"tagUuids,omitempty" bson:"tagUuids,omitempty"`
 }
